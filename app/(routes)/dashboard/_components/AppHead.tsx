@@ -1,9 +1,9 @@
 import React from 'react'
 
-function AppHeader() {
+function AppHead() {
   return (
     <div>AppHeader</div>
   )
 }
 
-export default AppHeader
+export default AppHead

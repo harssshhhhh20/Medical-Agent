@@ -1,5 +1,5 @@
 import React from 'react'
-import AppHeader from './_components/AppHeader';
+import AppHead from './_components/AppHead';
 
 function DashboardLayout({
   children,
@@ -8,7 +8,7 @@ function DashboardLayout({
 }>) {
   return (
     <div>
-        <AppHeader/>
+        <AppHead/>
         {children}
     </div>
   )
