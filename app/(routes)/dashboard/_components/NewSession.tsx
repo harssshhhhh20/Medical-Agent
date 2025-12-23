@@ -14,19 +14,40 @@ import { Textarea } from "@/components/ui/textarea";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { ArrowRight, Loader2 } from "lucide-react";
 import axios from "axios";
-import DoctorCard, { doctorAgent } from "./DoctorCard";
+import { doctorAgent } from "./DoctorCard";
+import SuggestionCard from "./SuggestionCard";
+import { log } from "console";
+import { useRouter } from "next/navigation";
 function NewSession() {
   const [note, setNote] = useState<string>();
   const [loading, setLoading] = useState(false);
   const [suggestedDoc, setSuggestedDoc] = useState<doctorAgent[]>();
+  const [selectedDoctor, setSelectedDoctor] = useState<doctorAgent>();
+  const router = useRouter();
   const onClickNext = async () => {
     setLoading(true);
     const result = await axios.post("/api/suggest-doctor", {
       notes: note,
     });
-    console.log(result.data);
+    console.log("API DATA:", result.data);
+    console.log("Is Array?", Array.isArray(result.data));
     setSuggestedDoc(result.data);
 
+    setLoading(false);
+  };
+
+  const onStartConsultation = async () => {
+    setLoading(true);
+    const result = await axios.post("/api/session-chat", {
+      notes: note,
+      selectedDoctor: selectedDoctor,
+    });
+    console.log(result.data);
+
+    if (result.data?.sessionId) {
+      console.log(result.data.sessionId);
+      router.push('/dashboard/medical-agent/'+result.data.sessionId)
+    }
     setLoading(false);
   };
 
@@ -49,10 +70,19 @@ function NewSession() {
                 />
               </div>
             ) : (
-              <div className="grid grid-cols-3 gap-5">
-                {suggestedDoc.map((doctor, index) => (
-                  <DoctorCard doctorAgent={doctor} key={index} />
-                ))}
+              <div>
+                <h2>Choose your Practitioner</h2>
+                <div className="grid grid-cols-3 gap-5">
+                  {suggestedDoc.map((doctor, index) => (
+                    <SuggestionCard
+                      doctorAgent={doctor}
+                      key={index}
+                      setSelectedDoctor={() => setSelectedDoctor(doctor)}
+                      //@ts-ignore
+                      selectedDoctor={selectedDoctor}
+                    />
+                  ))}
+                </div>
               </div>
             )}
           </DialogDescription>
@@ -67,7 +97,10 @@ function NewSession() {
               {loading ? <Loader2 className="animate-spin" /> : <ArrowRight />}
             </Button>
           ) : (
-            <Button>Start Consultation</Button>
+            <Button disabled={loading || !selectedDoctor} onClick={() => onStartConsultation()}>
+              Start Consultation
+              {loading ? <Loader2 className="animate-spin" /> : <ArrowRight />}
+            </Button>
           )}
         </DialogFooter>
       </DialogContent>

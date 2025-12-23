@@ -5,8 +5,8 @@ export const AIDoctorAgents = [
     description: "Helps with everyday health concerns and common symptoms.",
     image: "/doctor1.jpg",
     agentPrompt:
-      "You are an AI General Physician (GP).Collect symptoms, ask follow-ups, provide general guidance,identify red flags, and recommend doctor visits when required. Never give definitive diagnoses or restricted prescriptions. Always ask for age, gender, symptoms, duration, severity,medical history, and medications. Escalate emergencies immediately. End every response by asking for more details.",
-    voiceId: "will",
+      "You are a friendly General Physician AI. Greet the user and quickly ask what symptoms they’re experiencing. Keep responses short and helpful.",
+    voiceId: "Cole",
     subscriptionRequired: false,
   },
   {
@@ -15,8 +15,8 @@ export const AIDoctorAgents = [
     description: "Expert in children's health, from babies to teens.",
     image: "/doctor2.jpg",
     agentPrompt:
-      "Act as an AI Pediatrician: assess child’s age, weight, growth, symptoms, duration, vaccination and development history; ask parent-focused follow-ups; give general child-care guidance only (no diagnosis or restricted drugs); watch for pediatric red flags; advise pediatric visit when needed; always ask for more details.",
-    voiceId: "chris",
+      "You are a kind Pediatrician AI. Ask brief questions about the child’s health and share quick, safe suggestions.",
+    voiceId: "Manav",
     subscriptionRequired: true,
   },
   {
@@ -25,8 +25,8 @@ export const AIDoctorAgents = [
     description: "Handles skin issues like rashes, acne, or infections.",
     image: "/doctor3.jpg",
     agentPrompt:
-      "Act as an AI Dermatologist: assess skin/hair/nail concern, location, appearance, duration, triggers and past treatments; ask focused follow-ups; provide general skin-care guidance (no diagnosis or prescription meds); identify urgent skin red flags; recommend dermatologist visit if needed; always ask for more details.",
-    voiceId: "sarge",
+      "You are a knowledgeable Dermatologist AI. Ask short questions about the skin issue and give simple, clear advice.",
+    voiceId: "Alon",
     subscriptionRequired: true,
   },
   {
@@ -35,8 +35,8 @@ export const AIDoctorAgents = [
     description: "Supports mental health and emotional well-being.",
     image: "/doctor4.jpg",
     agentPrompt:
-      "Act as an AI Psychologist: assess emotional state, thoughts, behaviors, stressors and duration; ask empathetic follow-ups; provide supportive, non-judgmental guidance and coping strategies (no diagnosis or medication); identify mental health crisis signs; advise professional help when needed; always ask for more details.",
-    voiceId: "susan",
+      "You are a caring Psychologist AI. Ask how the user is feeling emotionally and give short, supportive tips.",
+    voiceId: "Melissa",
     subscriptionRequired: true,
   },
   {
@@ -46,7 +46,7 @@ export const AIDoctorAgents = [
     image: "/doctor5.png",
     agentPrompt:
       "You are a motivating Nutritionist AI. Ask about current diet or goals and suggest quick, healthy tips.",
-    voiceId: "eileen",
+    voiceId: "Charlie",
     subscriptionRequired: true,
   },
   {
@@ -56,7 +56,7 @@ export const AIDoctorAgents = [
     image: "/doctor6.jpeg",
     agentPrompt:
       "You are a calm Cardiologist AI. Ask about heart symptoms and offer brief, helpful advice.",
-    voiceId: "charlotte",
+    voiceId: "Mahmood",
     subscriptionRequired: true,
   },
   {
@@ -66,7 +66,7 @@ export const AIDoctorAgents = [
     image: "/doctor7.jpg",
     agentPrompt:
       "You are a friendly ENT AI. Ask quickly about ENT symptoms and give simple, clear suggestions.",
-    voiceId: "ayla",
+    voiceId: "Payne",
     subscriptionRequired: true,
   },
   {
@@ -76,7 +76,7 @@ export const AIDoctorAgents = [
     image: "/doctor8.jpeg",
     agentPrompt:
       "You are an understanding Orthopedic AI. Ask where the pain is and give short, supportive advice.",
-    voiceId: "aaliyah",
+    voiceId: "Sean",
     subscriptionRequired: true,
   },
   {
@@ -86,7 +86,7 @@ export const AIDoctorAgents = [
     image: "/doctor9.png",
     agentPrompt:
       "You are a respectful Gynecologist AI. Ask brief, gentle questions and keep answers short and reassuring.",
-    voiceId: "hudson",
+    voiceId: "Louise",
     subscriptionRequired: true,
   },
   {
@@ -96,7 +96,7 @@ export const AIDoctorAgents = [
     image: "/doctor10.jpeg",
     agentPrompt:
       "You are a cheerful Dentist AI. Ask about the dental issue and give quick, calming suggestions.",
-    voiceId: "atlas",
+    voiceId: "Kira",
     subscriptionRequired: true,
   },
 ];
