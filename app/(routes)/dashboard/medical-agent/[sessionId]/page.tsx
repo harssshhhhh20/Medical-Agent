@@ -7,7 +7,9 @@ import { Circle, PhoneCall, PhoneOff } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Vapi from "@vapi-ai/web";
-type SessionDetail = {
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+export type SessionDetail = {
   id: number;
   notes: string;
   sessionId: string;
@@ -30,6 +32,7 @@ function MedicalVoiceAgent() {
   const [currRole, setCurrRole] = useState<string | null>();
   const [liveTranscript, setLiveTranscript] = useState<string>();
   const [messages, setMessages] = useState<messages[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     sessionId && getSesssionInfo();
@@ -54,7 +57,7 @@ function MedicalVoiceAgent() {
       },
       voice: {
         provider: "vapi",
-        voiceId: sessionDetail?.selectedDoctor?.voiceId ?? '',
+        voiceId: sessionDetail?.selectedDoctor?.voiceId ?? "",
       },
       model: {
         provider: "openai",
@@ -104,20 +107,46 @@ function MedicalVoiceAgent() {
       console.log("Assistant stopped speaking");
       setCurrRole("User");
     });
-    vapi.on("error", (err) => {
-      console.error("Vapi error:", err);
-      setOnCall(false);
-    });
   };
-  const endCall = () => {
-    if (!vapiInstance) return;
-    vapiInstance.stop();
-    vapiInstance.off("call-start");
-    vapiInstance.off("call-end");
-    vapiInstance.off("message");
+  const endCall = async () => {
+    console.log("END CALL CLICKED");
 
-    setOnCall(false);
-    setVapiInstance(null);
+    try {
+      if (!vapiInstance) {
+        console.log("NO VAPI INSTANCE");
+        return;
+      }
+
+      vapiInstance.stop();
+      console.log("VAPI STOPPED");
+
+      setOnCall(false);
+      setVapiInstance(null);
+
+      console.log("CALLING GENERATE REPORT...");
+      const result = await generateReport();
+      console.log("FINAL REPORT RESULT:", result);
+    } catch (err) {
+      console.error("END CALL ERROR:", err);
+    }
+    toast.success('Your report has been generated')
+    router.replace('/dashboard');
+  };
+
+  const generateReport = async () => {
+    try {
+      const result = await axios.post("/api/medical-report", {
+        messages,
+        sessionDetail,
+        sessionId,
+      });
+
+      console.log("API RESPONSE:", result.data);
+      return result.data;
+    } catch (err: any) {
+      console.error("API ERROR:", err.response?.data || err);
+      throw err;
+    }
   };
 
   return (

@@ -1,6 +1,10 @@
+"use client"
 import { Button } from "@/components/ui/button";
+import axios from "axios";
+import { ArrowRight, Loader, Loader2Icon } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 export type doctorAgent = {
   id: number;
@@ -8,7 +12,7 @@ export type doctorAgent = {
   description: string;
   image: string;
   agentPrompt: string;
-  voiceId?:string,
+  voiceId?: string;
 };
 
 type props = {
@@ -16,6 +20,22 @@ type props = {
 };
 
 function DoctorCard({ doctorAgent }: props) {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const onStartConsultation = async () => {
+    setLoading(true);
+    const result = await axios.post("/api/session-chat", {
+      notes: 'New Query',
+      selectedDoctor: doctorAgent,
+    });
+    console.log(result.data);
+
+    if (result.data?.sessionId) {
+      console.log(result.data.sessionId);
+      router.push("/dashboard/medical-agent/" + result.data.sessionId);
+    }
+    setLoading(false);
+  };
   return (
     <div className="group relative overflow-hidden">
       <Image
@@ -29,10 +49,8 @@ function DoctorCard({ doctorAgent }: props) {
       <p className=" line-clamp-2 text-sm text-gray-500">
         {doctorAgent.description}
       </p>
-      <Button
-        className="w-[60%] font-bold top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 top-[45%] absolute opacity-0 group-hover:opacity-100 transition"
-      >
-        Consult
+      <Button onClick={onStartConsultation} className="w-[60%] font-bold top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 top-[45%] absolute opacity-0 group-hover:opacity-100 transition">
+        Consult{loading?<Loader2Icon className="animate-spin"/>:<ArrowRight/>}
       </Button>
     </div>
   );

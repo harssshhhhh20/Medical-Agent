@@ -16,7 +16,7 @@ export const AIDoctorAgents = [
     image: "/doctor2.jpg",
     agentPrompt:
       "You are a kind Pediatrician AI. Ask brief questions about the child’s health and share quick, safe suggestions.",
-    voiceId: "Manav",
+    voiceId: "Dan",
     subscriptionRequired: true,
   },
   {
@@ -26,7 +26,7 @@ export const AIDoctorAgents = [
     image: "/doctor3.jpg",
     agentPrompt:
       "You are a knowledgeable Dermatologist AI. Ask short questions about the skin issue and give simple, clear advice.",
-    voiceId: "Alon",
+    voiceId: "Zac",
     subscriptionRequired: true,
   },
   {
@@ -36,7 +36,7 @@ export const AIDoctorAgents = [
     image: "/doctor4.jpg",
     agentPrompt:
       "You are a caring Psychologist AI. Ask how the user is feeling emotionally and give short, supportive tips.",
-    voiceId: "Melissa",
+    voiceId: "Tara",
     subscriptionRequired: true,
   },
   {
@@ -46,7 +46,7 @@ export const AIDoctorAgents = [
     image: "/doctor5.png",
     agentPrompt:
       "You are a motivating Nutritionist AI. Ask about current diet or goals and suggest quick, healthy tips.",
-    voiceId: "Charlie",
+    voiceId: "Harry",
     subscriptionRequired: true,
   },
   {
@@ -56,7 +56,7 @@ export const AIDoctorAgents = [
     image: "/doctor6.jpeg",
     agentPrompt:
       "You are a calm Cardiologist AI. Ask about heart symptoms and offer brief, helpful advice.",
-    voiceId: "Mahmood",
+    voiceId: "Spencer",
     subscriptionRequired: true,
   },
   {
@@ -66,7 +66,7 @@ export const AIDoctorAgents = [
     image: "/doctor7.jpg",
     agentPrompt:
       "You are a friendly ENT AI. Ask quickly about ENT symptoms and give simple, clear suggestions.",
-    voiceId: "Payne",
+    voiceId: "Rohan",
     subscriptionRequired: true,
   },
   {
@@ -76,7 +76,7 @@ export const AIDoctorAgents = [
     image: "/doctor8.jpeg",
     agentPrompt:
       "You are an understanding Orthopedic AI. Ask where the pain is and give short, supportive advice.",
-    voiceId: "Sean",
+    voiceId: "Zoe",
     subscriptionRequired: true,
   },
   {
@@ -86,7 +86,7 @@ export const AIDoctorAgents = [
     image: "/doctor9.png",
     agentPrompt:
       "You are a respectful Gynecologist AI. Ask brief, gentle questions and keep answers short and reassuring.",
-    voiceId: "Louise",
+    voiceId: "Kylie",
     subscriptionRequired: true,
   },
   {
@@ -96,7 +96,7 @@ export const AIDoctorAgents = [
     image: "/doctor10.jpeg",
     agentPrompt:
       "You are a cheerful Dentist AI. Ask about the dental issue and give quick, calming suggestions.",
-    voiceId: "Kira",
+    voiceId: "Elliot",
     subscriptionRequired: true,
   },
 ];

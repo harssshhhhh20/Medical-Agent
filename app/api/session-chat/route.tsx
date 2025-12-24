@@ -3,7 +3,7 @@ import { SessionChatTable } from "@/config/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 
 export async function POST(req: NextRequest) {
   const { notes, selectedDoctor } = await req.json();
@@ -39,6 +39,20 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    // normalize
+    const normalizedSessionId = sessionId.trim().toLowerCase();
+
+    // ✅ CASE 1: sessionId = "all"
+    if (normalizedSessionId === "all") {
+      const result = await db
+        .select()
+        .from(SessionChatTable)
+        .orderBy(desc(SessionChatTable.id));
+
+      return NextResponse.json(result);
+    }
+
+    // ✅ CASE 2: single sessionId
     const result = await db
       .select()
       .from(SessionChatTable)

@@ -1,18 +1,19 @@
 import { UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const menuOpt=[
     {
         id:1,
         name:'Home',
-        path:'/home'
+        path:'/dashboard'
 
     },
     {
         id:2,
         name:'History',
-        path:'/history'
+        path:'/dashboard/history'
 
     },
     {
@@ -35,9 +36,9 @@ function AppHeader() {
         <Image src={'/logo.svg'} alt='' width={60} height={60}/>
         <div className='hidden md:flex items-center gap-12'>
             {menuOpt.map((option,index)=>(
-                <div key={index}>
+                <Link href={option.path} key={index}>
                     <h2 className='hover:font-bold cursor-pointer transition-all'>{option.name}</h2>
-                </div>
+                </Link>
             ))}
         </div>
         <UserButton/>
