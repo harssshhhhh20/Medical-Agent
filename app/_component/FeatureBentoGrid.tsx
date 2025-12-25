@@ -9,7 +9,7 @@ import {
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
-
+import { useEffect, useState } from "react";
 
 export default function FeatureBentoGrid() {
   return (
@@ -103,6 +103,12 @@ const SkeletonTwo = () => {
     },
   };
   const arr = new Array(6).fill(0);
+  const [maxWidth, setMaxWidth] = useState<string | null>(null);
+
+  useEffect(() => {
+    const value = Math.random() * (100 - 40) + 40;
+    setMaxWidth(`${value}%`);
+  }, []);
   return (
     <motion.div
       initial="initial"
@@ -115,7 +121,7 @@ const SkeletonTwo = () => {
           key={"skelenton-two" + i}
           variants={variants}
           style={{
-            maxWidth: Math.random() * (100 - 40) + 40 + "%",
+            maxWidth: maxWidth ?? '60%',
           }}
           className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-neutral-100 dark:bg-black w-full h-4"
         ></motion.div>

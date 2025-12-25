@@ -21,7 +21,7 @@ function HistoryTable({ historyList }: Props) {
   return (
     <div>
       <Table>
-        <TableCaption>Previous Visit Reports</TableCaption>
+        <TableCaption>Previous Visit Reports(Upto 10)</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead >AI Specialist</TableHead>
@@ -31,7 +31,7 @@ function HistoryTable({ historyList }: Props) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {historyList.map((record: SessionDetail, index: number) => (
+          {historyList.slice(0, 10).map((record: SessionDetail, index: number) => (
             <TableRow key={index}>
               <TableCell className="font-medium">{record.selectedDoctor?.specialist}</TableCell>
               <TableCell>{record.notes}</TableCell>

@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
+
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import NewSession from "./NewSession";
@@ -9,6 +9,7 @@ import { SessionDetail } from "../medical-agent/[sessionId]/page";
 
 function HistoryList() {
   const [historyList, setHistoryList] = useState<SessionDetail[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(()=>{
     getHistory();
@@ -16,8 +17,11 @@ function HistoryList() {
   
   const getHistory=async()=>{
     const result = await axios.get('/api/session-chat?sessionId=all')
-    console.log(result.data);
     setHistoryList(result.data);
+    setLoading(false);
+  }
+  if (loading) {
+    return <p className="mt-10 text-gray-500">Loading history...</p>;
   }
 
   return (

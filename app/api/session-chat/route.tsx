@@ -1,6 +1,6 @@
 import { db } from "@/config/db";
 import { SessionChatTable } from "@/config/schema";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser, clerkClient } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { desc, eq } from "drizzle-orm";
@@ -28,6 +28,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
+  const user = await currentUser();
   try {
     const { searchParams } = new URL(req.url);
     const sessionId = searchParams.get("sessionId");
@@ -39,20 +40,20 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // normalize
+
     const normalizedSessionId = sessionId.trim().toLowerCase();
 
-    // ✅ CASE 1: sessionId = "all"
+
     if (normalizedSessionId === "all") {
       const result = await db
         .select()
         .from(SessionChatTable)
+        //@ts-ignore
+        .where(eq(SessionChatTable.createdBy,user?.primaryEmailAddress?.emailAddress))
         .orderBy(desc(SessionChatTable.id));
 
       return NextResponse.json(result);
     }
-
-    // ✅ CASE 2: single sessionId
     const result = await db
       .select()
       .from(SessionChatTable)

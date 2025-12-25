@@ -40,7 +40,6 @@ function MedicalVoiceAgent() {
 
   const getSesssionInfo = async () => {
     const result = await axios.get("/api/session-chat?sessionId=" + sessionId);
-    console.log(result.data);
     setSessionDetail(result.data);
   };
 
@@ -83,7 +82,6 @@ function MedicalVoiceAgent() {
     vapi.on("message", (message) => {
       if (message.type === "transcript") {
         const { role, transcriptType, transcript } = message;
-        console.log(`${message.role}: ${message.transcript}`);
         if (transcriptType == "partial") {
           setLiveTranscript(transcript);
           setCurrRole(role);
@@ -109,7 +107,6 @@ function MedicalVoiceAgent() {
     });
   };
   const endCall = async () => {
-    console.log("END CALL CLICKED");
 
     try {
       if (!vapiInstance) {
@@ -118,12 +115,12 @@ function MedicalVoiceAgent() {
       }
 
       vapiInstance.stop();
-      console.log("VAPI STOPPED");
+      
 
       setOnCall(false);
       setVapiInstance(null);
 
-      console.log("CALLING GENERATE REPORT...");
+      
       const result = await generateReport();
       console.log("FINAL REPORT RESULT:", result);
     } catch (err) {
@@ -140,8 +137,6 @@ function MedicalVoiceAgent() {
         sessionDetail,
         sessionId,
       });
-
-      console.log("API RESPONSE:", result.data);
       return result.data;
     } catch (err: any) {
       console.error("API ERROR:", err.response?.data || err);

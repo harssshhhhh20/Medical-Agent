@@ -19,7 +19,7 @@ const menuOpt=[
     {
         id:3,
         name:'Pricing',
-        path:'/pricing'
+        path:'/dashboard/pricing'
 
     },
     {
@@ -33,7 +33,7 @@ const menuOpt=[
 function AppHeader() {
   return (
     <div className=' justify-between flex items-center p-4 shadow px-5 md:px-10 lg:px-15'>
-        <Image src={'/logo.svg'} alt='' width={60} height={60}/>
+        <Image src={'/med_logo.png'} alt='' width={560} height={160} className='w-[200px] '/>
         <div className='hidden md:flex items-center gap-12'>
             {menuOpt.map((option,index)=>(
                 <Link href={option.path} key={index}>

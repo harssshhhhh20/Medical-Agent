@@ -16,7 +16,6 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import axios from "axios";
 import { doctorAgent } from "./DoctorCard";
 import SuggestionCard from "./SuggestionCard";
-import { log } from "console";
 import { useRouter } from "next/navigation";
 function NewSession() {
   const [note, setNote] = useState<string>();
@@ -29,8 +28,6 @@ function NewSession() {
     const result = await axios.post("/api/suggest-doctor", {
       notes: note,
     });
-    console.log("API DATA:", result.data);
-    console.log("Is Array?", Array.isArray(result.data));
     setSuggestedDoc(result.data);
 
     setLoading(false);
@@ -42,10 +39,8 @@ function NewSession() {
       notes: note,
       selectedDoctor: selectedDoctor,
     });
-    console.log(result.data);
 
     if (result.data?.sessionId) {
-      console.log(result.data.sessionId);
       router.push('/dashboard/medical-agent/'+result.data.sessionId)
     }
     setLoading(false);
